@@ -5,7 +5,18 @@ export const adminDashboard = (
   res: Response
 ) => {
   res.json({
+    success: true,
     message: "Welcome Admin",
+  });
+};
+
+export const teamLeadDashboard = (
+  req: Request,
+  res: Response
+) => {
+  res.json({
+    success: true,
+    message: "Welcome Team Lead",
   });
 };
 
@@ -14,6 +25,7 @@ export const employeeDashboard = (
   res: Response
 ) => {
   res.json({
+    success: true,
     message: "Welcome Employee",
   });
 };

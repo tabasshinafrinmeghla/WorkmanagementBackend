@@ -2,7 +2,7 @@ import express from "express";
 
 import {
   adminDashboard,
-  hrDashboard,
+  teamLeadDashboard,
   employeeDashboard,
 } from "../controllers/user.controller.js";
 
@@ -18,18 +18,25 @@ router.get(
   adminDashboard
 );
 
+// router.get(
+//   "/hr",
+//   protect,
+//   authorize("hr", "admin"),
+//   hrDashboard
+// );
+
 router.get(
-  "/hr",
+  "/team-lead",
   protect,
-  authorize("hr", "admin"),
-  hrDashboard
+  authorize("teamLead", "admin"),
+  teamLeadDashboard
 );
 
+// AFTER
 router.get(
   "/employees",
   protect,
-  authorize("employee", "hr", "admin"),
+  authorize("employee", "teamLead", "admin"),
   employeeDashboard
 );
-
 export default router;
