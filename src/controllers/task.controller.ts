@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Task from "../models/Task.model";
+import Task from "../models/Task.model.js";
 
 // GET all tasks (with optional search)
 export const getTasks = async (req: Request, res: Response) => {

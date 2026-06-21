@@ -2,9 +2,9 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 
-import authRoutes from "./routes/auth.routes";
-import userRoutes from "./routes/user.routes";
-import taskRoutes from "./routes/task.routes"; // ✅ NEW
+import authRoutes from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
+import taskRoutes from "./routes/task.routes.js"; // ✅ NEW
 
 const app = express();
 

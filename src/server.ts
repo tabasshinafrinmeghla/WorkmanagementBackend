@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import app from "./app.js";
-import connectDB from "./config/db";
+import connectDB from "./config/db.js";
 
 console.log("connectDB =", connectDB);
 
