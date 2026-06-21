@@ -4,10 +4,10 @@ import {
   adminDashboard,
   teamLeadDashboard,
   employeeDashboard,
-} from "../controllers/user.controller.js";
+} from "../controllers/user.controller";
 
-import { protect } from "../middleware/auth.middleware.js";
-import { authorize } from "../middleware/role.middleware.js";
+import { protect } from "../middleware/auth.middleware";
+import { authorize } from "../middleware/role.middleware";
 
 const router = express.Router();
 
