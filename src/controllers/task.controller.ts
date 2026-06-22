@@ -1,22 +1,33 @@
 import { Request, Response } from "express";
 import Task from "../models/Task.model.js";
 
-// GET all tasks (with optional search)
+// GET all tasks (with robust text search, status dropdown, and calendar date filtering)
 export const getTasks = async (req: Request, res: Response) => {
   try {
-    const { search } = req.query;
+    const { q, status, date } = req.query;
 
-    let query = {};
-    if (search) {
-      query = {
-        $or: [
-          { title: { $regex: search, $options: "i" } },
-          { teamMembers: { $elemMatch: { $regex: search, $options: "i" } } },
-          { status: { $regex: search, $options: "i" } },
-        ],
-      };
+    // Initialize an empty query configuration object
+    let query: any = {};
+
+    // 1. Handle text search parameter ('q' from your frontend state)
+    if (q) {
+      query.$or = [
+        { title: { $regex: String(q), $options: "i" } },
+        { teamMembers: { $elemMatch: { $regex: String(q), $options: "i" } } },
+      ];
     }
 
+    // 2. Handle status dropdown filter
+    if (status && status !== "All") {
+      query.status = status;
+    }
+
+    // 3. Handle exact string matching for HTML5 Calendar Component dates ("YYYY-MM-DD")
+    if (date) {
+      query.date = date;
+    }
+
+    // Execute filtered query and sort tasks by newest first
     const tasks = await Task.find(query).sort({ createdAt: -1 });
     res.status(200).json({ success: true, data: tasks });
   } catch (error) {
