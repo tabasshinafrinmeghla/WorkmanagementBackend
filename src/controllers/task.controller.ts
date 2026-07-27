@@ -24,9 +24,11 @@ export const getTasks = async (req: Request, res: Response) => {
 
     // 3. Handle exact string matching for HTML5 Calendar Component dates ("YYYY-MM-DD")
     if (date) {
-      query.date = date;
-    }
-
+  query.date = {
+    $regex: "^" + String(date),
+    $options: "i",
+  };
+}
     // Execute filtered query and sort tasks by newest first
     const tasks = await Task.find(query).sort({ createdAt: -1 });
     res.status(200).json({ success: true, data: tasks });
