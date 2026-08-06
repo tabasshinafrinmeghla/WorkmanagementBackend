@@ -1,6 +1,7 @@
 import express from "express";
 
 import {
+  getUsers,
   adminDashboard,
   teamLeadDashboard,
   employeeDashboard,
@@ -11,6 +12,10 @@ import { authorize } from "../middleware/role.middleware.js";
 
 const router = express.Router();
 
+// Get All Users
+router.get("/", getUsers);
+
+// Admin Dashboard
 router.get(
   "/admin",
   protect,
@@ -25,6 +30,7 @@ router.get(
 //   hrDashboard
 // );
 
+// Team Lead Dashboard
 router.get(
   "/team-lead",
   protect,
@@ -32,11 +38,12 @@ router.get(
   teamLeadDashboard
 );
 
-// AFTER
+// Employee Dashboard
 router.get(
   "/employees",
   protect,
   authorize("employee", "teamLead", "admin"),
   employeeDashboard
 );
+
 export default router;
